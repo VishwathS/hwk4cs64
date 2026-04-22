@@ -1,0 +1,143 @@
+# fibonacci.asm program
+# CMPSC 64, (c) 2025, Z.Matni
+#
+#    unsigned int n, f1 = 1, f2 = 1, i = 2, nextfib;
+#    cout << "Enter a number:\n";
+#    cin >> n;
+#    if (n > 1) {
+#        cout << "The first " << n << " numbers in the Fibonacci series are:\n";
+#        cout << f1 << " " << f2;
+#        while (i < n) {
+#            nextfib = f1 + f2;
+#            f1 = f2;
+#            f2 = nextfib;
+#            cout << " " << nextfib;
+#            i++;
+#        }
+#    }
+#   cout << endl;
+
+.data
+	prompt:     .asciiz "Enter a number:\n"
+    first:      .asciiz "The first "
+    numbers:    .asciiz " numbers in the Fibonacci series are:\n"
+	spacech:    .asciiz " "
+    newline:    .asciiz "\n"
+	
+.text
+
+main:
+# TODO: Follow the comments below, and the assignment description, 
+#       as guides for how to write this assembly program.
+
+
+# Print the prompt and get user input
+	la $a0, prompt
+    li $v0, 4
+    syscall
+
+    li $v0, 5
+    syscall
+    move $t0, $v0    # t0 = n
+
+# Initialize all registers needed in the program (as appropriate)
+
+    li $t1, 1   # f1
+    li $t2, 1   # f2
+    li $t3, 2   # i
+
+# if (exit conditions are met) then go to exit
+    # I realized there's an edge case, when I input 1, nothing returns
+    # The function should also exit if the number is 0 or less than 0, so I implemented that here
+    ble $t0, $zero, exit
+    li $t4, 1
+    beq $t0, $t4, one
+    ble $t0, $t4, exit
+    
+# otherwise:
+    # print "The first " n " numbers in the Fibonacci series are:\n"
+    la $a0, first
+    li $v0, 4
+    syscall
+
+    move $a0, $t0
+    li $v0, 1
+    syscall
+
+    la $a0, numbers
+    li $v0, 4
+    syscall
+
+    # print f1 " " f2
+
+    move $a0, $t1
+    li $v0, 1
+    syscall
+
+    la $a0, spacech
+    li $v0, 4
+    syscall
+
+    move $a0, $t2
+    li $v0, 1
+    syscall
+
+    # while loop:
+
+    wloop:
+        bge $t3, $t0, done
+
+        add $t5, $t1, $t2  # t5 = nextfib
+        move $t1, $t2
+        move $t2, $t5
+
+        la $a0, spacech
+        li $v0, 4
+        syscall
+
+        move $a0, $t5
+        li $v0, 1
+        syscall
+
+        addi $t3, $t3, 1
+
+        j wloop
+
+done:
+    # print newline
+    la $a0, newline
+    li $v0, 4
+    syscall
+
+exit:
+    # quit program
+    li $v0, 10
+    syscall
+
+
+# Edge case
+one: 
+    li $t1, 1
+
+    la $a0, first
+    li $v0, 4
+    syscall
+
+    move $a0, $t0
+    li $v0, 1
+    syscall
+
+    la $a0, numbers
+    li $v0, 4
+    syscall
+
+    move $a0, $t1
+    li $v0, 1
+    syscall
+
+    la $a0, newline
+    li $v0, 4
+    syscall
+
+    li $v0, 10
+    syscall
