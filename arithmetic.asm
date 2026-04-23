@@ -28,7 +28,7 @@ main:
 	mflo $t5
 
 	sll $t4, $t4, 6
-	add $t6, $t4, $t5 
+	add $t6, $t4, $t5
 
 	# Print
 	li $v0, 1

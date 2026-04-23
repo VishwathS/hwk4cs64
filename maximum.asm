@@ -11,6 +11,7 @@
 
 	q: .asciiz "Enter the next number:\n"
     n: .asciiz "\n"
+	m: .asciiz "Maximum: "
 
 #Text Area (i.e. instructions/code directive)
 .text
@@ -75,22 +76,48 @@ ct2:
 	j rt1
 
 rt0:
+	li $v0, 4
+	la $a0, m
+	syscall
+
+	la $a0, n
+    li $v0, 4
+    syscall
+
 	li $v0, 1
 	move $a0, $t0
 	syscall
 	j exit
 
 rt1:
+	li $v0, 4
+	la $a0, m
+	syscall
+
+	la $a0, n
+    li $v0, 4
+    syscall
+
 	li $v0, 1
 	move $a0, $t1
 	syscall
 	j exit
 
 rt2:
+	li $v0, 4
+	la $a0, m
+	syscall
+
+	la $a0, n
+    li $v0, 4
+    syscall
+	
 	li $v0, 1
 	move $a0, $t2
 	syscall
 	j exit
+
+
 
 
 exit:

@@ -47,11 +47,7 @@ main:
     li $t3, 2   # i
 
 # if (exit conditions are met) then go to exit
-    # I realized there's an edge case, when I input 1, nothing returns
-    # The function should also exit if the number is 0 or less than 0, so I implemented that here
-    ble $t0, $zero, exit
     li $t4, 1
-    beq $t0, $t4, one
     ble $t0, $t4, exit
     
 # otherwise:
@@ -111,33 +107,5 @@ done:
 
 exit:
     # quit program
-    li $v0, 10
-    syscall
-
-
-# Edge case
-one: 
-    li $t1, 1
-
-    la $a0, first
-    li $v0, 4
-    syscall
-
-    move $a0, $t0
-    li $v0, 1
-    syscall
-
-    la $a0, numbers
-    li $v0, 4
-    syscall
-
-    move $a0, $t1
-    li $v0, 1
-    syscall
-
-    la $a0, newline
-    li $v0, 4
-    syscall
-
     li $v0, 10
     syscall
