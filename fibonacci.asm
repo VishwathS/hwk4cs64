@@ -48,7 +48,7 @@ main:
 
 # if (exit conditions are met) then go to exit
     li $t4, 1
-    ble $t0, $t4, exit
+    ble $t0, $t4, done
     
 # otherwise:
     # print "The first " n " numbers in the Fibonacci series are:\n"
