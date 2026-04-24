@@ -83,6 +83,11 @@ rt0:
 	li $v0, 1
 	move $a0, $t0
 	syscall
+
+	li $v0, 4
+	la $a0, n
+	syscall
+
 	j exit
 
 rt1:
@@ -93,6 +98,11 @@ rt1:
 	li $v0, 1
 	move $a0, $t1
 	syscall
+
+	li $v0, 4
+	la $a0, n
+	syscall
+
 	j exit
 
 rt2:
@@ -103,6 +113,11 @@ rt2:
 	li $v0, 1
 	move $a0, $t2
 	syscall
+
+	li $v0, 4
+	la $a0, n
+	syscall
+
 	j exit
 
 exit:
