@@ -9,7 +9,7 @@
 .data
 	# TODO: Complete these incomplete declarations / initializations
 
-	q: .asciiz "Enter the next number:\n"
+	q: .asciiz "Enter number:\n"
     n: .asciiz "\n"
 	m: .asciiz "Maximum: "
 
